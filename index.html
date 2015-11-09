@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#2196F3">
+	<title>三明学院点歌台 - Smuradio</title>
+	<!-- 站点显示标志 -->
+	<link rel="shortcut icon" type="image/ico" href="uri" />
+	<link rel="stylesheet" href="css/style.css" media="screen" >
+	<link rel="stylesheet" href="css/md-icons.css">
+	<link href="css/mfb.css" rel="stylesheet">
+	<!-- 移动设备自适应 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<!-- Web字体库调用 >
+	<link href='https://fonts.useso.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css' -->
+	<!-- 外部脚本加载 -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mfb.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body>
+	<div class='bodywrap'>
+		<div class="browse">
+			<article class="announcement">
+				<div class="levitate module-announcement">
+					<div class="module-content">
+						<p>
+							来自林xx同学的寻物启示：上周三于厚德楼505或者学校某食堂遗失一把海德网球拍
+							请有拾到者拨打电话：18859862750 谢谢！
+						</p>
+					</div>
+				</div>
+			</article>
+			<main class="main-page">
+				<div class="module levitate row">
+					<div class="title-page">
+						<img src="image/music.jpg" alt="音乐封面" width="160px" height="160px" ondragstart="return false"/>
+					</div>
+					<div class="module-r">
+						<div class="song-title">
+							<h1>Good Time</h1>
+							<p>最想对TA说：希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我</p>
+						</div>
+						<div class="module-action x">
+							<p>点歌人:xxxx</p>
+							<p>送给:xxxx</p>
+						<div class="button-r"><button type="button">未播放</button></div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+		<!-- 底部悬浮按钮 -->
+		<ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+			<li class="mfb-component__wrap">
+				<a href="javascript: void(0);" class="mfb-component__button--main">
+					<i class="mfb-component__main-icon--resting mdi mdi-plus"></i>
+					<i class="mfb-component__main-icon--active mdi mdi-plus"></i>
+				</a>
+				<ul class="mfb-component__list">
+					<li>
+						<button type="button" id='findbtn' data-mfb-label="寻物启事发布" class="mfb-component__button--child mfd-saffron">
+						<i class="mdi mdi-help mfb-icon"></i></button>
+					</li>
+					<li>
+						<button type="button" id='pickbtn' data-mfb-label="我要点歌" class="mfb-component__button--child mfd-green">
+						<i class="mdi mdi-music-note mfb-icon"></i></button>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<footer>
+		<nav class="footer-copyright-bg">
+			<li class="f-copyright-li"><a href="#">&copy; 2015 三明学院点歌台. All rights reserved</a></li>
+			<li class="f-copyright-li">Created by <a href="#">qwe7002</a> | <a href="https://github.com/AddamsNode" target='_blank'>Addams_Chen</a> | <a href="http://classicoldsong.me" target='_blank'>ClassicOldSong</a></li>
+		</nav>
+	</footer>
+	<header>
+		<nav class="default-nav">
+			<div class="logo">
+				<li><a href="index.html" class="logo">三明学院点歌台</a></li>
+			</div>
+		</nav>
+	</header>
+	<!-- 弹窗全屏盖罩 -->
+	<div class="overlay pick">
+		<div class="overlay-z bg"></div>
+		<div class="module-mfb">
+			<form class="from-module-text" action="index.php" method="post">
+						<h1>我要点歌</h1>
+							<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
+							<label for="song-name">点歌人:</label>
+							<input type="text" id="song-name" name="song-name" class="song-name">
+							<label for="time">点歌时间</label>
+							<input type="date" name="name" value="">
+							<label for="name">送给:</label>
+							<input type="text" id="name" name="name" class="name">
+							<label for="text">我想对TA说:</label>
+							<input type="text" id="textarea" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
+							<input type="button" value="取消" class="cancelbtn box module-action-r">
+							<input type="submit" value="提交" class="module-action-r submitbtn">
+			</form>
+		</div>
+	</div>
+	<div class="overlay lost">
+		<div class="overlay-z bg"></div>
+		<div class="module-mfb">
+			<form class="from-module-text" action="index.php" method="post">
+						<h1>失物招领</h1>
+							<label for="song">物品名称:</label>
+							<input type="text" id="song" name="song" class="song">
+							<label for="song-name">拾取地点:</label>
+							<input type="text" id="song-name" name="song-name" class="song-name">
+							<label for="name">联系方式:</label>
+							<input type="text" id="name" name="name" class="name">
+							<label for="text">物品详情信息:</label>
+							<input type="text" id="textarea" name="textarea" class="textarea" value="红色Nexus6一部，右下角有轻微磕碰">
+							<input type="button" value="取消" class="cancelbtn box module-action-r">
+							<input type="submit" value="提交" class="module-action-r submitbtn">
+			</form>
+		</div>
+	</div>
+	<div class="overlay song">
+		<div id='searchwrap' class="overlay-z"></div>
+		<div class="module-mfb">
+			<form class="from-module-text" action="index.php" method="post">
+						<h1>歌曲搜索</h1>
+						<input type="search" name="name" value="歌曲名称">
+						<input type="button" value="取消" id="cancelbtn-search" class="cancelbtn module-action-r">
+						<input type="submit" value="提交" class="module-action-r submitbtn">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
