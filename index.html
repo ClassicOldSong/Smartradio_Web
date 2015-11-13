@@ -88,49 +88,50 @@
 	<div class="overlay pick">
 		<div class="overlay-z bg"></div>
 		<div class="module-mfb">
-			<form class="from-module-text" action="index.php" method="post">
-						<h1>我要点歌</h1>
-							<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
-							<label for="song-name">点歌人:</label>
-							<input type="text" id="song-name" name="song-name" class="song-name">
-							<label for="time">点歌时间</label>
-							<input type="date" name="name" value="">
-							<label for="name">送给:</label>
-							<input type="text" id="name" name="name" class="name">
-							<label for="text">我想对TA说:</label>
-							<input type="text" id="textarea" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
-							<input type="button" value="取消" class="cancelbtn box module-action-r">
-							<input type="submit" value="提交" class="module-action-r submitbtn">
-			</form>
+			<div class="from-module-text" action="index.php" method="post">
+				<h1>我要点歌</h1>
+				<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
+				<label for="song-name">点歌人:</label>
+				<input type="text" id="song-name" name="song-name" class="song-name">
+				<label for="time">点歌时间</label>
+				<input type="date" name="name" value="">
+				<label for="name">送给:</label>
+				<input type="text" id="name" name="name" class="name">
+				<label for="text">我想对TA说:</label>
+				<input type="text" id="textarea" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
+				<input type="button" value="取消" class="cancelbtn box module-action-r">
+				<input id="submitSong" type="button" value="提交" class="module-action-r submitbtn">
+			</div>
 		</div>
 	</div>
 	<div class="overlay lost">
 		<div class="overlay-z bg"></div>
 		<div class="module-mfb">
-			<form class="from-module-text" action="index.php" method="post">
-						<h1>失物招领</h1>
-							<label for="song">物品名称:</label>
-							<input type="text" id="song" name="song" class="song">
-							<label for="song-name">拾取地点:</label>
-							<input type="text" id="song-name" name="song-name" class="song-name">
-							<label for="name">联系方式:</label>
-							<input type="text" id="name" name="name" class="name">
-							<label for="text">物品详情信息:</label>
-							<input type="text" id="textarea" name="textarea" class="textarea" value="红色Nexus6一部，右下角有轻微磕碰">
-							<input type="button" value="取消" class="cancelbtn box module-action-r">
-							<input type="submit" value="提交" class="module-action-r submitbtn">
-			</form>
+			<div class="from-module-text" action="index.php" method="post">
+				<h1>失物招领</h1>
+				<label for="getname">拾取者:</label>
+				<input type="text" id="getname" name="getname" class="song">
+				<label for="getplace">拾取/丢失地点:</label>
+				<input type="text" id="getplace" name="getplace" class="song-name">
+				<label for="contactinfo">联系方式:</label>
+				<input type="text" id="contactinfo" name="contactinfo" class="name">
+				<label for="iteminfo">详细信息:</label>
+				<input type="text" id="iteminfo" name="iteminfo" class="textarea" value="红色Nexus6一部，右下角有轻微磕碰">
+				<input type="button" value="取消" class="cancelbtn box module-action-r">
+				<input id="submitLost" type="button" value="提交" class="module-action-r submitbtn">
+			</div>
 		</div>
 	</div>
 	<div class="overlay song">
 		<div id='searchwrap' class="overlay-z"></div>
 		<div class="module-mfb">
-			<form class="from-module-text" action="index.php" method="post">
-						<h1>歌曲搜索</h1>
-						<input type="search" name="name" value="歌曲名称">
-						<input type="button" value="取消" id="cancelbtn-search" class="cancelbtn module-action-r">
-						<input type="submit" value="提交" class="module-action-r submitbtn">
-			</form>
+			<div class="from-module-text" action="index.php" method="post">
+				<h1>歌曲搜索</h1>
+				<input id='titleinput' type="search" name="name" value="歌曲名称">
+				<ul class='resultlist'></ul>
+				<input type="button" value="取消" id="cancelbtn-search" class="cancelbtn module-action-r">
+				<input type="button" id="searchsong" value="搜索" class="module-action submitbtn">
+			</div>
 		</div>
 	</div>
 </body>

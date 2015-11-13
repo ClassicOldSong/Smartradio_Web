@@ -10,6 +10,10 @@ $(function() {
 	var mainpage = $('.main-page');
 	var announce = $('.announcement');
 
+	var searchoffset = 0;
+	var inputTitle = '';
+	var selectedSong = {};
+
 	showcode.click(function() {
 		panel.toggleClass('viewCode');
 	});
@@ -41,6 +45,97 @@ $(function() {
 	$('#searchwrap, #cancelbtn-search').click(function() {
 		$('.overlay.song').fadeOut();
 	});
+
+	$('#searchsong').click(function() {
+		inputTitle = $('#titleinput').val();
+		searchoffset = 0;
+		$('.resultlist').empty();
+		$('.resultlist').append($('<li class="songinfo"/>')
+			.text('加载更多 »')
+			.attr('id', 'morebtn')
+			.attr('style', 'display: none;')
+			.click(function() {
+				searchoffset = searchoffset + 10;
+				applySearch(inputTitle, searchoffset);
+			})
+		);
+		applySearch(inputTitle, 0);
+	});
+
+	$('#submitSong').click(function() {
+		//Test song adding
+		if (typeof selectedSong.name != 'undefined') {
+			addSongList({
+				songcover: selectedSong.picUrl,
+				songtitle: selectedSong.name,
+				info: "0",
+				user: "TestUser",
+				to: "TestTo",
+				message: "现充统统去死吧！！！！"
+			});
+			$('.overlay').fadeOut();
+			menu.fadeIn();
+		}
+	});
+
+	$('#submitLost').click(function() {
+		var getname = $('#getname').val().trim();
+		var getplace = $('#getplace').val().trim();
+		var contactinfo = $('#contactinfo').val().trim();
+		var iteminfo = $('#iteminfo').val().trim();
+		var ifsubmit = getname == '' ? false : getplace == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
+		if (ifsubmit != false) {
+			var message = "来自"+getname+"同学的寻物启事：地点："+getplace+"，详情："+iteminfo+"，请联系"+contactinfo+"！谢谢！";
+			addAnnounce(message);
+		}
+	});
+
+	function applySearch(title, offset) {
+		$.get('http://s.music.163.com/search/get', {
+			'type': 1,
+			's': title,
+			'limit': 10,
+			'offset': offset
+		}, function(data) {
+			if (data.result) {
+				console.log(data.result);
+				for (var i = 0; i < data.result.songs.length; i++) {
+					var artists = data.result.songs[i].artists[0].name;
+					var itemId = i + offset;
+					for (var j = 1; j < data.result.songs[i].artists.length; j++) {
+						if (data.result.songs[i].artists[j]) {
+							artists = artists + "/" + data.result.songs[i].artists[j].name;
+						}
+					}
+					$("#morebtn").before($('<li class="songinfo"/>')
+						.text(data.result.songs[i].name + " - " + artists)
+						.attr('listid', i)
+						.attr('artists', artists)
+						.attr('id', 'musiclistitem' + itemId)
+						.click(function() {
+							var listid = $(this).attr('listid');
+							var songinfo = $(this).text();
+							selectedSong = {
+								'name': data.result.songs[listid].name,
+								'picUrl': data.result.songs[listid].album.picUrl,
+								'musicid': data.result.songs[listid].id
+							}
+							$('#songsearch').text(songinfo);
+							$('.overlay.song').fadeOut();
+						})
+					);
+				}
+				if (data.result.songCount > 10) {
+					$("#morebtn").show();
+				} else {
+					$("#morebtn").before($('<li class="songinfo"/>').text('╮(╯_╰)╭没有更多了'));
+				}
+			} else {
+				$("#morebtn").hide();
+				$("#morebtn").before($('<li class="songinfo"/>').text('╮(╯_╰)╭没有更多了'));
+			}
+		}, 'jsonp');
+	}
 
 	function renderMenu() {
 		menu.css('display', 'none');
@@ -99,7 +194,7 @@ $(function() {
 		if (isnotice) {
 			$messageWrap.css('background-color', '#00BBFF');
 		}
-		
+
 		//Append to announcement
 		if (isnotice) {
 			announce.prepend($messageWrap);

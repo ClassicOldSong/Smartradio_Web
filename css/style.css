@@ -6,7 +6,7 @@ body {
 html, body, div, dl, dt, dd, ul, ol, li, h1,
 h2, h3, h4, h5, h6, pre, code, p {
 	font-family: "Roboto" ,Helvetica, "Microsoft YaHei", sans-serif;
-	font-size: 100%；
+	font-size: 100%;
 }
 h1 {font-size: 26px;}
 h2 {font-size: 22px;}
@@ -31,6 +31,18 @@ li {
 .bodywrap {
 	padding-top: 88px;
 	min-height: calc(100vh - 200px);
+}
+
+::selection {background:#d3d3d3;}
+::-webkit-scrollbar-track-piece{}
+::-webkit-scrollbar{
+	width: 0;
+}
+::-webkit-scrollbar-thumb{
+	background: rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.3);
 }
 
 /* 页面宽度定义 */
@@ -76,6 +88,13 @@ button {
 }
 .submitbtn {
 	background-color: #3B58B4;
+	border: 0px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 16px;
+    outline: none;
+    max-width: 72px;
+    height: 36px;
 }
 .cancelbtn {
 	background-color: #888;
@@ -83,12 +102,23 @@ button {
 .cancelbtn,.submitbtn {
 	padding: 0 22px;
 }
-.cancelbtn:hover,.cancelbtn:active,
-.submitbtn:hover,.submitbtn:active{
-	-webkit-box-shadow: 1px 4px 5px rgba(0,0,0,0.26);
-	box-shadow: 1px 4px 5px rgba(0,0,0,0.26);
+.cancelbtn,.cancelbtn,
+.submitbtn,.submitbtn{
+	position: relative;
+	top: 0;
+	-webkit-box-shadow: 0 0 0 rgba(0,0,0,0.26);
+	box-shadow: 0 0 0 rgba(0,0,0,0.26);
 	-webkit-transition: .4s;
 	transition: .4s;
+}
+.cancelbtn:hover,.submitbtn:hover {
+	-webkit-box-shadow: 1px 4px 5px rgba(0,0,0,0.26);
+	box-shadow: 1px 4px 5px rgba(0,0,0,0.26);
+}
+.cancelbtn:active,.submitbtn:active {
+	top: 2px;
+	-webkit-box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
 }
 .submitbtn {
 	margin-right: 8px;
@@ -150,6 +180,8 @@ li a {
 }
 .module-action {
 	display: inline-block;
+	margin-top: 28px;
+	color: #fff;
 }
 .module-action p {
 	display: inline-block;
@@ -211,6 +243,7 @@ li a {
 	width: calc(100% - 228px);
 	border-top: solid 1px #eee;
 	bottom: 4px;
+	color: #000;
 }
 .title-page {
 	float: left;
@@ -236,8 +269,9 @@ input {
 .module-mfb input {
 	margin-bottom: 6px;
 }
-form.from-module-text {
-	padding: 1.6em 3.2em 6em;
+.from-module-text {
+	padding: 1.6em 3.2em 2em;
+	overflow: hidden;
 }
 .module-mfb-form {
 	width: 100%;
@@ -379,6 +413,31 @@ button.kc_fab_main_btn{
 	-ms-animation:ripple 0.65s linear;
 	 -o-animation:ripple 0.65s linear;
 		animation:ripple 0.65s linear;
+}
+
+.resultlist {
+	padding: 0;
+	margin: 0;
+	max-height: 300px;
+	overflow: scroll;
+}
+
+.songinfo {
+	list-style: none;
+	cursor: default;
+	display: list-item;
+	line-height: 40px;
+	background-color: #FFF;
+	padding: 0 5px 0 0;
+	clear: both;
+	-webkit-transition: background-color 500ms, padding 500ms;
+	-moz-transition: background-color 500ms, padding 500ms;
+	-o-transition: background-color 500ms, padding 500ms;
+	transition: background-color 500ms, padding 500ms;
+}
+.songinfo:hover {
+	padding: 0 0 0 5px;
+	background-color: #CCC;
 }
 
 @-webkit-keyframes ripple {
