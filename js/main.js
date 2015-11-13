@@ -98,7 +98,6 @@ $(function() {
 			'offset': offset
 		}, function(data) {
 			if (data.result) {
-				console.log(data.result);
 				for (var i = 0; i < data.result.songs.length; i++) {
 					var artists = data.result.songs[i].artists[0].name;
 					var itemId = i + offset;
