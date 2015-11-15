@@ -46,7 +46,7 @@ li {
 	background: rgba(0, 0, 0, 0.3);
 }
 
-/* 页面宽度定义 */
+/* é¡µé¢å®½åº¦å®šä¹‰ */
 .browse {
 	width: 80%;
 	max-width: 1000px;
@@ -80,7 +80,7 @@ footer {
 	color: #CCC;
 	text-align: center;
 }
-/* 按钮样式定义 */
+/* æŒ‰é’®æ ·å¼å®šä¹‰ */
 button {
 	border: 0px;
 	border-radius: 2px;
@@ -132,7 +132,7 @@ button {
 .songsearch-btn {
 	width: 100%;
 }
-/* 顶部导航栏定义 */
+/* é¡¶éƒ¨å¯¼èˆªæ å®šä¹‰ */
 header {
 	position: fixed;
 	-webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.26);
@@ -267,7 +267,7 @@ li a {
 input,button,select,textarea{outline:none}
  *:focus { outline: none; }
 
-/* 表单样式定义 */
+/* è¡¨å•æ ·å¼å®šä¹‰ */
 input {
 	line-height: 28px;
 	border: 0;
@@ -297,7 +297,7 @@ input {
 	line-height: 36px;
 }
 
-/* 底部版权区域样式定义 */
+/* åº•éƒ¨ç‰ˆæƒåŒºåŸŸæ ·å¼å®šä¹‰ */
 footer {
 	background: #212121;
 	line-height: 46px;
@@ -306,6 +306,7 @@ footer {
 }
 .footer-copyright-bg {
 	width: 80%;
+	max-width: 1000px;
 	margin: 0 auto;
 	background: #212121;
 	height: 100%;
@@ -460,7 +461,7 @@ button.kc_fab_main_btn{
 	100% {opacity: 0; transform: scale(2.5);}
 }
 
-/* 媒体设备查询样式定义 */
+/* åª’ä½“è®¾å¤‡æŸ¥è¯¢æ ·å¼å®šä¹‰ */
 @media screen and (max-width: 64em) {
 	main {
 	width: 100%;
