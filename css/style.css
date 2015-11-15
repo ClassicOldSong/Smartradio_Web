@@ -10,7 +10,7 @@ h2, h3, h4, h5, h6, pre, code, p {
 }
 h1 {font-size: 26px;}
 h2 {font-size: 22px;}
-p {font-size: 16px;}
+p {font-size: 16px;margin: 0;}
 small {font-size: 11px;}
 
 a,a:link {
@@ -20,6 +20,7 @@ a:link, a:active, a:visited, a:hover
 {
 	text-decoration: none;
 	outline:none;
+	color: #FFF;
 }
 li {
 	display: inline-block;
@@ -155,12 +156,12 @@ li a {
 }
 
 .logo {
-	font-size: 1.2em;
+	font-size: 1.5em;
 	max-width: 1000px;
 	width: 80%;
 	margin: 0 auto;
-	padding: 11.6px 0;
 	color: #fff;
+	line-height: 53px;
 }
 
 .module {
@@ -191,6 +192,7 @@ li a {
 .module-action p {
 	display: inline-block;
 	margin-right: 8px;
+	padding: 12px 0;
 }
 .module-action-r {
 	float: right;
