@@ -23,32 +23,10 @@
 	<div class='bodywrap'>
 		<div class="browse">
 			<article class="announcement">
-				<div class="levitate module-announcement">
-					<div class="module-content">
-						<p>
-							来自林xx同学的寻物启示：上周三于厚德楼505或者学校某食堂遗失一把海德网球拍
-							请有拾到者拨打电话：18859862750 谢谢！
-						</p>
-					</div>
-				</div>
+				<p class="loadingindicator">—— Loading ——</p>
 			</article>
 			<main class="main-page">
-				<div class="module levitate row">
-					<div class="title-page">
-						<img src="image/music.jpg" alt="音乐封面" width="160px" height="160px" ondragstart="return false"/>
-					</div>
-					<div class="module-r">
-						<div class="song-title">
-							<h1>Good Time</h1>
-							<p>最想对TA说：希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我</p>
-						</div>
-						<div class="module-action x">
-							<p>点歌人:xxxx</p>
-							<p>送给:xxxx</p>
-						<div class="button-r"><button type="button">未播放</button></div>
-						</div>
-					</div>
-				</div>
+				<p class="loadingindicator">—— Loading ——</p>
 			</main>
 		</div>
 		<!-- 底部悬浮按钮 -->
@@ -91,14 +69,14 @@
 			<div class="from-module-text" action="index.php" method="post">
 				<h1>我要点歌</h1>
 				<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
-				<label for="song-name">点歌人:</label>
-				<input type="text" id="song-name" name="song-name" class="song-name">
-				<label for="time">点歌时间</label>
-				<input type="date" name="name" value="">
-				<label for="name">送给:</label>
-				<input type="text" id="name" name="name" class="name">
+				<label for="sendername">点歌人:</label>
+				<input type="text" id="sendername" name="sendername" class="song-name">
+				<label for="playtime">点歌时间</label>
+				<input type="date" id="playtime" name="name">
+				<label for="toname">送给:</label>
+				<input type="text" id="toname" name="toname" class="name">
 				<label for="text">我想对TA说:</label>
-				<input type="text" id="textarea" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
+				<input type="text" id="sendmessage" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
 				<input type="button" value="取消" class="cancelbtn box module-action-r">
 				<input id="submitSong" type="button" value="提交" class="module-action-r submitbtn">
 			</div>
@@ -124,10 +102,10 @@
 	</div>
 	<div class="overlay song">
 		<div id='searchwrap' class="overlay-z"></div>
-		<div class="module-mfb">
+		<div class="module-mfb" style="margin-top: 50px;">
 			<div class="from-module-text" action="index.php" method="post">
 				<h1>歌曲搜索</h1>
-				<input id='titleinput' type="search" name="name" value="歌曲名称">
+				<input id='titleinput' type="search" name="name" placeholder="请输入歌曲名称">
 				<ul class='resultlist'></ul>
 				<input type="button" value="取消" id="cancelbtn-search" class="cancelbtn module-action-r">
 				<input type="button" id="searchsong" value="搜索" class="module-action submitbtn">

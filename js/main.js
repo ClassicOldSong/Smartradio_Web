@@ -63,16 +63,36 @@ $(function() {
 	});
 
 	$('#submitSong').click(function() {
-		//Test song adding
-		if (typeof selectedSong.name != 'undefined') {
+		var sendername = $('#sendername').val().trim();
+		var playtime = $('#playtime').val().trim();
+		var toname = $('#toname').val().trim();
+		var sendmessage = $('#sendmessage').val().trim();
+		var ifsubmit = typeof selectedSong.name == 'undefined' ? false : sendername == '' ? false : playtime == '' ? false : toname == '' ? false : sendmessage == '' ? false : true;
+		console.log(sendername+' '+playtime+' '+toname+' '+sendmessage);
+		console.log(ifsubmit);
+		if (ifsubmit) {
+			/*Test song adding*/
 			addSongList({
 				songcover: selectedSong.picUrl,
 				songtitle: selectedSong.name,
 				info: "0",
-				user: "TestUser",
-				to: "TestTo",
-				message: "现充统统去死吧！！！！"
+				user: sendername,
+				to: toname,
+				message: sendmessage
 			});
+			/*End testing*/
+			var postinfo = {
+				mod: "requestmusicpost",
+				user: sendername,
+				songname: selectedSong.musicid,
+				to: toname,
+				message: sendmessage,
+				time: playtime.replace(/\-/g, '\/')
+			}
+			console.log(postinfo);
+			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+				console.log(res);
+			}, 'json');
 			$('.overlay').fadeOut();
 			menu.fadeIn();
 		}
@@ -84,9 +104,23 @@ $(function() {
 		var contactinfo = $('#contactinfo').val().trim();
 		var iteminfo = $('#iteminfo').val().trim();
 		var ifsubmit = getname == '' ? false : getplace == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
-		if (ifsubmit != false) {
-			var message = "来自"+getname+"同学的寻物启事：地点："+getplace+"，详情："+iteminfo+"，请联系"+contactinfo+"！谢谢！";
+		if (ifsubmit) {
+			/*Test adding message*/
+			var message = "来自" + getname + "同学的寻物启事：地点：" + getplace + "，详情：" + iteminfo + "，请联系" + contactinfo + "！谢谢！";
 			addAnnounce(message);
+			/*End testing*/
+			var postinfo = {
+				mod: "LostandfoundPost",
+				user: getname,
+				message: iteminfo,
+				tel: contactinfo
+			}
+			console.log(postinfo);
+			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+				console.log(res);
+			}, 'json');
+			$('.overlay').fadeOut();
+			menu.fadeIn();
 		}
 	});
 
@@ -145,7 +179,7 @@ $(function() {
 	}
 
 	function addSongList(data) {
-		var $coverimg = $('<img src="'+data.songcover+'" alt="专辑封面" width="160px" height="160px" ondragstart="return false" onerror="this.src=\'image/music.jpg\'"/>');
+		var $coverimg = $('<img src="' + data.songcover + '" alt="专辑封面" width="160px" height="160px" ondragstart="return false" onerror="this.src=\'image/music.jpg\'"/>');
 		var $cover = $('<div class="title-page"/>')
 			.append($coverimg);
 		var $title = $('<h1/>')
@@ -155,9 +189,9 @@ $(function() {
 		var $headmsg = $('<div class="song-title"/>')
 			.append($title, $message);
 		var $user = $('<p/>')
-			.text('点歌人：'+data.user);
+			.text('点歌人：' + data.user);
 		var $to = $('<p/>')
-			.text('送给：'+data.to);
+			.text('送给：' + data.to);
 		var $isplayedbtn = $('<button type="button">');
 		if (data.info == "0") {
 			$isplayedbtn.text('未播放');
@@ -202,7 +236,28 @@ $(function() {
 		}
 	}
 
-	var testsonginfo = {
+	$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
+		console.log(res);
+		announce.empty();
+		addAnnounce(res.notice, true);
+		if (res.permission == 0) {
+			menu.hide();
+			addAnnounce('当前不能点歌', true);
+		}
+		for (i in res.lostandfound) {
+			addAnnounce(res.lostandfound[i]);
+		}
+	}, 'json');
+
+	$.get('http://121.41.115.101:88/api/command/index.php', function(res) {
+		console.log(res);
+		mainpage.empty();
+		for (i in res) {
+			addSongList(res[i]);
+		}
+	}, 'json');
+
+	/*var testsonginfo = {
 		info: "0",
 		songtitle: "西行妖の春",
 		songcover: "http://p1.music.126.net/GAoElZdWZdGJ_ZPa8GRNVQ==/801543976648994.jpg?param=160x160",
@@ -214,5 +269,5 @@ $(function() {
 	var testnotice = "通知测试";
 	addSongList(testsonginfo);
 	addAnnounce(testlost);
-	addAnnounce(testnotice, true);
+	addAnnounce(testnotice, true);*/
 });

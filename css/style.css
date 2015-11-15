@@ -74,6 +74,11 @@ footer {
 	width: 76%;
 	margin: 0 auto;
 }
+
+.loadingindicator {
+	color: #CCC;
+	text-align: center;
+}
 /* 按钮样式定义 */
 button {
 	border: 0px;
