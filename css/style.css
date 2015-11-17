@@ -80,6 +80,24 @@ footer {
 	color: #CCC;
 	text-align: center;
 }
+
+.toastwrap {
+	position: fixed;
+	background-color: #444;
+	color: #FFF;
+	bottom: 0;
+	width: 100%;
+	line-height: 22px;
+	overflow: hidden;
+	word-wrap: break-word;
+	word-break: normal;
+	display: none;
+}
+
+.toast {
+	margin: 18px;
+}
+
 /* æŒ‰é’®æ ·å¼å®šä¹‰ */
 button {
 	border: 0px;

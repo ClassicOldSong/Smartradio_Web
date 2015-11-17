@@ -27,14 +27,17 @@ $(function() {
 	});
 
 	$('#pickbtn').click(function() {
+		$('#modulepick').css('margin-top', $('body').scrollTop()+'px');
 		$('.pick').fadeIn();
 		menu.fadeOut();
 	});
 	$('#findbtn').click(function() {
+		$('#modulelost').css('margin-top', $('body').scrollTop()+'px');
 		$('.lost').fadeIn();
 		menu.fadeOut();
 	});
 	$('#songsearch').click(function() {
+		$('#modulesearch').css('margin-top', $('body').scrollTop()+50+'px');
 		$('.song').fadeIn();
 		menu.fadeOut();
 	});
@@ -62,6 +65,10 @@ $(function() {
 		applySearch(inputTitle, 0);
 	});
 
+	$('.toastwrap').click(function() {
+		$('.toastwrap').fadeOut();
+	});
+
 	$('#submitSong').click(function() {
 		var sendername = $('#sendername').val().trim();
 		var playtime = $('#playtime').val().trim();
@@ -72,19 +79,19 @@ $(function() {
 		console.log(ifsubmit);
 		if (ifsubmit) {
 			/*Test song adding*/
-			addSongList({
-				songcover: selectedSong.picUrl,
-				songtitle: selectedSong.name,
-				info: "0",
-				user: sendername,
-				to: toname,
-				message: sendmessage
-			});
+			//addSongList({
+			//	songcover: selectedSong.picUrl,
+			//	songtitle: selectedSong.name,
+			//	info: "0",
+			//	user: sendername,
+			//	to: toname,
+			//	message: "「" + sendmessage + "」"
+			//});
 			/*End testing*/
 			var postinfo = {
 				mod: "requestmusicpost",
 				user: sendername,
-				songname: selectedSong.musicid,
+				songid: selectedSong.musicid,
 				to: toname,
 				message: sendmessage,
 				time: playtime.replace(/\-/g, '\/')
@@ -92,6 +99,8 @@ $(function() {
 			console.log(postinfo);
 			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
 				console.log(res);
+				getSongList();
+				setToast(res.message);
 			}, 'json');
 			$('.overlay').fadeOut();
 			menu.fadeIn();
@@ -100,14 +109,13 @@ $(function() {
 
 	$('#submitLost').click(function() {
 		var getname = $('#getname').val().trim();
-		var getplace = $('#getplace').val().trim();
 		var contactinfo = $('#contactinfo').val().trim();
 		var iteminfo = $('#iteminfo').val().trim();
-		var ifsubmit = getname == '' ? false : getplace == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
+		var ifsubmit = getname == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
 		if (ifsubmit) {
 			/*Test adding message*/
-			var message = "来自" + getname + "同学的寻物启事：地点：" + getplace + "，详情：" + iteminfo + "，请联系" + contactinfo + "！谢谢！";
-			addAnnounce(message);
+			//var message = "来自" + getname + "同学的寻物启事：" + iteminfo + "，请有拾到者拨打电话" + contactinfo + "。谢谢！";
+			//addAnnounce(message);
 			/*End testing*/
 			var postinfo = {
 				mod: "LostandfoundPost",
@@ -118,11 +126,18 @@ $(function() {
 			console.log(postinfo);
 			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
 				console.log(res);
+				getMessageList();
+				setToast(res.message);
 			}, 'json');
 			$('.overlay').fadeOut();
 			menu.fadeIn();
 		}
 	});
+
+	function setToast(data) {
+		$('.toast').text(data);
+		$('.toastwrap').fadeIn();
+	}
 
 	function applySearch(title, offset) {
 		$.get('http://s.music.163.com/search/get', {
@@ -193,17 +208,21 @@ $(function() {
 		var $to = $('<p/>')
 			.text('送给：' + data.to);
 		var $isplayedbtn = $('<button type="button">');
-		if (data.info == "0") {
-			$isplayedbtn.text('未播放');
-		} else if (data.info == "1") {
-			$isplayedbtn.text('无法播放')
-				.css('background-color', '#FF0000');
-		} else if (data.info == "2") {
-			$isplayedbtn.text('已播放')
-				.css('background-color', '#20B333');
-		} else {
-			$isplayedbtn.text('未知')
-				.css('background-color', '#0000FF');
+		switch (data.info) {
+			case "0":
+				$isplayedbtn.text('未播放');
+				break;
+			case "1":
+				$isplayedbtn.text('已播放')
+					.css('background-color', '#20B333');
+				break;
+			case "2":
+				$isplayedbtn.text('无法播放')
+					.css('background-color', '#FF0000');
+				break;
+			default:
+				$isplayedbtn.text('未知')
+					.css('background-color', '#0000FF');
 		}
 		var $isplayed = $('<div class="button-r"/>')
 			.append($isplayedbtn);
@@ -215,47 +234,51 @@ $(function() {
 			.append($cover, $mainBody);
 
 		//Append to main-page
-		mainpage.prepend($listDiv);
+		mainpage.append($listDiv);
 	}
 
 	function addAnnounce(data, isnotice) {
 		var $messageBody = $('<p/>')
 			.text(data);
 		var $messageWrap = $('<div class="levitate module-announcement"/>')
-			.append('<div class="module-content"/>')
 			.append($messageBody);
-		if (isnotice) {
-			$messageWrap.css('background-color', '#00BBFF');
-		}
 
 		//Append to announcement
 		if (isnotice) {
+			$messageWrap.css('background-color', '#00BBFF');
 			announce.prepend($messageWrap);
 		} else {
 			announce.append($messageWrap);
 		}
 	}
 
-	$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
-		console.log(res);
-		announce.empty();
-		addAnnounce(res.notice, true);
-		if (res.permission == 0) {
-			menu.hide();
-			addAnnounce('当前不能点歌', true);
-		}
-		for (i in res.lostandfound) {
-			addAnnounce(res.lostandfound[i]);
-		}
-	}, 'json');
+	function getMessageList() {
+		$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
+			console.log(res);
+			announce.empty();
+			addAnnounce(res.notice, true);
+			if (res.permission == 0) {
+				menu.hide();
+				addAnnounce('当前不能点歌', true);
+			}
+			for (i in res.lostandfound) {
+				addAnnounce(res.lostandfound[i], 0);
+			}
+		}, 'json');
+	}
 
-	$.get('http://121.41.115.101:88/api/command/index.php', function(res) {
-		console.log(res);
-		mainpage.empty();
-		for (i in res) {
-			addSongList(res[i]);
-		}
-	}, 'json');
+	function getSongList() {
+		$.get('http://121.41.115.101:88/api/command/index.php', function(res) {
+			console.log(res);
+			mainpage.empty();
+			for (i in res) {
+				addSongList(res[i]);
+			}
+		}, 'json');
+	}
+
+	getMessageList();
+	getSongList();
 
 	/*var testsonginfo = {
 		info: "0",

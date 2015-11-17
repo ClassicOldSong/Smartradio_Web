@@ -64,7 +64,7 @@
 	<!-- 弹窗全屏盖罩 -->
 	<div class="overlay pick">
 		<div class="overlay-z bg"></div>
-		<div class="module-mfb">
+		<div id="modulepick" class="module-mfb">
 			<div class="from-module-text">
 				<h1>我要点歌</h1>
 				<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
@@ -75,7 +75,7 @@
 				<label for="toname">送给:</label>
 				<input type="text" id="toname" name="toname" class="name">
 				<label for="sendmessage">我想对TA说:</label>
-				<input type="text" id="sendmessage" name="textarea" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
+				<input type="text" id="sendmessage" name="textarea" maxlength="140" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
 				<input type="button" value="取消" class="cancelbtn box module-action-r">
 				<input id="submitSong" type="button" value="提交" class="module-action-r submitbtn">
 			</div>
@@ -83,13 +83,11 @@
 	</div>
 	<div class="overlay lost">
 		<div class="overlay-z bg"></div>
-		<div class="module-mfb">
+		<div id="modulelost" class="module-mfb">
 			<div class="from-module-text">
 				<h1>失物招领</h1>
-				<label for="getname">拾取者:</label>
+				<label for="getname">姓名:</label>
 				<input type="text" id="getname" name="getname" class="song">
-				<label for="getplace">拾取/丢失地点:</label>
-				<input type="text" id="getplace" name="getplace" class="song-name">
 				<label for="contactinfo">联系方式:</label>
 				<input type="text" id="contactinfo" name="contactinfo" class="name">
 				<label for="iteminfo">详细信息:</label>
@@ -101,7 +99,7 @@
 	</div>
 	<div class="overlay song">
 		<div id='searchwrap' class="overlay-z"></div>
-		<div class="module-mfb" style="margin-top: 50px;">
+		<div id="modulesearch" class="module-mfb">
 			<div class="from-module-text">
 				<h1>歌曲搜索</h1>
 				<input id='titleinput' type="search" name="name" placeholder="请输入歌曲名称">
@@ -110,6 +108,9 @@
 				<input type="button" id="searchsong" value="搜索" class="module-action submitbtn">
 			</div>
 		</div>
+	</div>
+	<div class="toastwrap">
+		<div class="toast">null</div>
 	</div>
 </body>
 </html>
