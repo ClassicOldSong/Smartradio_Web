@@ -85,13 +85,13 @@ footer {
 	position: fixed;
 	background-color: #444;
 	color: #FFF;
-	bottom: 0;
+	bottom: -58px;
 	width: 100%;
 	line-height: 22px;
 	overflow: hidden;
 	word-wrap: break-word;
 	word-break: normal;
-	display: none;
+	z-index: 99999;
 }
 
 .toast {
@@ -294,7 +294,7 @@ input {
 .module-mfb input {
 	margin-bottom: 6px;
 }
-.from-module-text {
+.form-module-text {
 	padding: 1.6em 3.2em 2em;
 	overflow: hidden;
 }
@@ -307,12 +307,21 @@ input {
 	padding: 8px 16px;
 	margin-bottom: 22px;
 }
-.from-module-text input {
+.form-module-text input {
 	display: block;
 	width: 100%;
 }
-.from-module-text label {
+.form-module-text label {
 	line-height: 36px;
+}
+
+.form-module-text select {
+	height: 28px;
+	border: 0;
+	border-bottom: solid 1px #3B58B4;
+	display: block;
+	width: 100%;
+	margin-bottom: 6px;
 }
 
 /* åº•éƒ¨ç‰ˆæƒåŒºåŸŸæ ·å¼å®šä¹‰ */

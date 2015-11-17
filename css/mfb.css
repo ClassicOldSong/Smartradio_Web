@@ -113,7 +113,8 @@
 
 .mfb-component--br {
   right: 0;
-  bottom: 0; }
+  bottom: 0;
+  transition: bottom 200ms linear }
 
 /*------------------------------------*\
     #BUTTONS | Base

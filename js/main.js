@@ -66,15 +66,17 @@ $(function() {
 	});
 
 	$('.toastwrap').click(function() {
-		$('.toastwrap').fadeOut();
+		$('.toastwrap').animate({bottom: "-"+$('.toastwrap').height()+"px"}, 200);
+		menu.css('bottom', 0);
 	});
 
 	$('#submitSong').click(function() {
 		var sendername = $('#sendername').val().trim();
-		var playtime = $('#playtime').val().trim();
+		var playdate = $('#playdate').val();
+		var playtime = $('#playtime').val();
 		var toname = $('#toname').val().trim();
 		var sendmessage = $('#sendmessage').val().trim();
-		var ifsubmit = typeof selectedSong.name == 'undefined' ? false : sendername == '' ? false : playtime == '' ? false : toname == '' ? false : sendmessage == '' ? false : true;
+		var ifsubmit = typeof selectedSong.name == 'undefined' ? false : sendername == '' ? false : playtime == '' ? false : playdate == '' ? false : toname == '' ? false : sendmessage == '' ? false : true;
 		if (ifsubmit) {
 			/*Test song adding*/
 			//addSongList({
@@ -91,8 +93,9 @@ $(function() {
 				user: sendername,
 				songid: selectedSong.musicid,
 				to: toname,
+				option: playtime,
 				message: sendmessage,
-				time: playtime.replace(/\-/g, '\/')
+				time: playdate.replace(/\-/g, '\/')
 			}
 			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
 				getSongList();
@@ -130,7 +133,9 @@ $(function() {
 
 	function setToast(data) {
 		$('.toast').text(data);
-		$('.toastwrap').fadeIn();
+		$('.toastwrap').css('bottom', '-' + $('.toastwrap').height() + 'px');
+		$('.toastwrap').animate({bottom: 0}, 200);
+		menu.css('bottom', $('.toastwrap').height() + 'px');
 	}
 
 	function applySearch(title, offset) {
