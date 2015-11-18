@@ -83,6 +83,7 @@ footer {
 
 .toastwrap {
 	position: fixed;
+	cursor: default;
 	background-color: #444;
 	color: #FFF;
 	bottom: -58px;

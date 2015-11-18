@@ -50,19 +50,7 @@ $(function() {
 	});
 
 	$('#searchsong').click(function() {
-		inputTitle = $('#titleinput').val();
-		searchoffset = 0;
-		$('.resultlist').empty();
-		$('.resultlist').append($('<li class="songinfo"/>')
-			.text('加载更多 »')
-			.attr('id', 'morebtn')
-			.attr('style', 'display: none;')
-			.click(function() {
-				searchoffset = searchoffset + 10;
-				applySearch(inputTitle, searchoffset);
-			})
-		);
-		applySearch(inputTitle, 0);
+		startSearch();
 	});
 
 	$('.toastwrap').click(function() {
@@ -117,6 +105,29 @@ $(function() {
 		}
 	});
 
+	$("#titleinput").keydown(function(event) {
+		console.log(event);
+		if (event.which === 13) {
+			startSearch();
+		}
+	});
+
+	function startSearch() {
+		inputTitle = $('#titleinput').val();
+		searchoffset = 0;
+		$('.resultlist').empty();
+		$('.resultlist').append($('<li class="songinfo"/>')
+			.text('加载更多 »')
+			.attr('id', 'morebtn')
+			.attr('style', 'display: none;')
+			.click(function() {
+				searchoffset = searchoffset + 6;
+				applySearch(inputTitle, searchoffset);
+			})
+		);
+		applySearch(inputTitle, 0);
+	}
+
 	function setToast(data) {
 		$('.toast').text(data);
 		$('.toastwrap').css('bottom', '-' + $('.toastwrap').height() + 'px');
@@ -128,7 +139,7 @@ $(function() {
 		$.get('http://s.music.163.com/search/get', {
 			'type': 1,
 			's': title,
-			'limit': 10,
+			'limit': 6,
 			'offset': offset
 		}, function(data) {
 			if (data.result) {
@@ -158,7 +169,7 @@ $(function() {
 						})
 					);
 				}
-				if (data.result.songCount > 10) {
+				if (data.result.songCount > 6) {
 					$("#morebtn").show();
 				} else {
 					$("#morebtn").before($('<li class="songinfo"/>').text('╮(╯_╰)╭没有更多了'));
@@ -242,11 +253,15 @@ $(function() {
 
 	function getMessageList() {
 		$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
+			$('#logo_').text(res.projectname);
+			document.title = res.projectname + ' - Smuradio';
 			announce.empty();
-			addAnnounce(res.notice, true);
-			if (res.permission == 0) {
-				menu.hide();
-				addAnnounce('当前不能点歌', true);
+			if (res.notice != "") {
+				addAnnounce(res.notice, true);
+			}
+			if (res.permission === "0") {
+				$('#pickbtn').hide();
+				setToast('当前不能点歌');
 			}
 			for (i in res.lostandfound) {
 				addAnnounce(res.lostandfound[i], 0);
