@@ -69,18 +69,18 @@
 				<h1>我要点歌</h1>
 				<button type="button" id='songsearch' class="songsearch-btn">歌曲搜索</button>
 				<label for="sendername">点歌人:</label>
-				<input type="text" id="sendername" name="sendername" class="song-name">
+				<input type="text" id="sendername" name="sendername" class="song-name" placeholder="点歌人姓名">
 				<label for="playdate">播放日期</label>
 				<input type="date" id="playdate" name="name">
 				<label for="playtime">播出时间</label>
 				<select class="settingInput" id="playtime">
-					<option value="noon">中午</option>
-					<option value="afternoon">下午</option>
+					<option value="中午">中午</option>
+					<option value="下午">下午</option>
 				</select>
 				<label for="toname">送给:</label>
-				<input type="text" id="toname" name="toname" class="name">
+				<input type="text" id="toname" name="toname" class="name" placeholder="想送给的人的姓名">
 				<label for="sendmessage">我想对TA说:</label>
-				<input type="text" id="sendmessage" name="textarea" maxlength="140" class="textarea" value="希望我们能够一直开开心心的，一起努力加油，我的未来有你，你的未来有我">
+				<input type="text" id="sendmessage" name="textarea" maxlength="140" class="textarea" placeholder="赠言or寄语">
 				<input type="button" value="取消" class="cancelbtn box module-action-r">
 				<input id="submitSong" type="button" value="提交" class="module-action-r submitbtn">
 			</div>
@@ -90,13 +90,13 @@
 		<div class="overlay-z bg"></div>
 		<div id="modulelost" class="module-mfb">
 			<div class="form-module-text">
-				<h1>失物招领</h1>
+				<h1>寻物启事</h1>
 				<label for="getname">姓名:</label>
-				<input type="text" id="getname" name="getname" class="song">
+				<input type="text" id="getname" name="getname" class="song" placeholder="丢失者姓名">
 				<label for="contactinfo">联系方式:</label>
-				<input type="text" id="contactinfo" name="contactinfo" class="name">
+				<input type="number" id="contactinfo" name="contactinfo" class="name" placeholder="电话号码">
 				<label for="iteminfo">详细信息:</label>
-				<input type="text" id="iteminfo" name="iteminfo" class="textarea" value="红色Nexus6一部，右下角有轻微磕碰">
+				<input type="text" id="iteminfo" name="iteminfo" class="textarea" placeholder="物品详细描述">
 				<input type="button" value="取消" class="cancelbtn box module-action-r">
 				<input id="submitLost" type="button" value="提交" class="module-action-r submitbtn">
 			</div>

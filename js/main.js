@@ -78,16 +78,6 @@ $(function() {
 		var sendmessage = $('#sendmessage').val().trim();
 		var ifsubmit = typeof selectedSong.name == 'undefined' ? false : sendername == '' ? false : playtime == '' ? false : playdate == '' ? false : toname == '' ? false : sendmessage == '' ? false : true;
 		if (ifsubmit) {
-			/*Test song adding*/
-			//addSongList({
-			//	songcover: selectedSong.picUrl,
-			//	songtitle: selectedSong.name,
-			//	info: "0",
-			//	user: sendername,
-			//	to: toname,
-			//	message: "「" + sendmessage + "」"
-			//});
-			/*End testing*/
 			var postinfo = {
 				mod: "requestmusicpost",
 				user: sendername,
@@ -112,10 +102,6 @@ $(function() {
 		var iteminfo = $('#iteminfo').val().trim();
 		var ifsubmit = getname == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
 		if (ifsubmit) {
-			/*Test adding message*/
-			//var message = "来自" + getname + "同学的寻物启事：" + iteminfo + "，请有拾到者拨打电话" + contactinfo + "。谢谢！";
-			//addAnnounce(message);
-			/*End testing*/
 			var postinfo = {
 				mod: "LostandfoundPost",
 				user: getname,
@@ -193,9 +179,6 @@ $(function() {
 	}
 
 	function addSongList(data) {
-		var $coverimg = $('<img src="' + data.songcover + '" alt="专辑封面" width="160px" height="160px" ondragstart="return false" onerror="this.src=\'image/music.jpg\'"/>');
-		var $cover = $('<div class="title-page"/>')
-			.append($coverimg);
 		var $title = $('<h1/>')
 			.text(data.songtitle);
 		var $message = $('<p/>')
@@ -213,15 +196,15 @@ $(function() {
 				break;
 			case "1":
 				$isplayedbtn.text('已播放')
-					.css('background-color', '#20B333');
+					.css('background-color', '#259B24');
 				break;
 			case "2":
 				$isplayedbtn.text('无法播放')
-					.css('background-color', '#FF0000');
+					.css('background-color', '#E51C23');
 				break;
 			default:
 				$isplayedbtn.text('未知')
-					.css('background-color', '#0000FF');
+					.css('background-color', '#5677FC');
 		}
 		var $isplayed = $('<div class="button-r"/>')
 			.append($isplayedbtn);
@@ -230,7 +213,13 @@ $(function() {
 		var $mainBody = $('<div class="module-r"/>')
 			.append($headmsg, $info);
 		var $listDiv = $('<div class="module levitate row"/>')
-			.append($cover, $mainBody);
+			.append($mainBody);
+		if ($(window).width() > 1024) {
+			var $coverimg = $('<img src="' + data.songcover + '" alt="专辑封面" width="160px" height="160px" ondragstart="return false" onerror="this.src=\'image/music.jpg\'"/>');
+			var $cover = $('<div class="title-page"/>')
+				.append($coverimg);
+			$listDiv.prepend($cover);
+		}
 
 		//Append to main-page
 		mainpage.append($listDiv);
@@ -244,7 +233,7 @@ $(function() {
 
 		//Append to announcement
 		if (isnotice) {
-			$messageWrap.css('background-color', '#00BBFF');
+			$messageWrap.css('background-color', '#03A9F4');
 			announce.prepend($messageWrap);
 		} else {
 			announce.append($messageWrap);
@@ -277,17 +266,5 @@ $(function() {
 	getMessageList();
 	getSongList();
 
-	/*var testsonginfo = {
-		info: "0",
-		songtitle: "西行妖の春",
-		songcover: "http://p1.music.126.net/GAoElZdWZdGJ_ZPa8GRNVQ==/801543976648994.jpg?param=160x160",
-		user: "TestUser",
-		to: "TestTo",
-		message: "现充统统去死吧！！！！"
-	};
-	var testlost = "失物招领测试";
-	var testnotice = "通知测试";
-	addSongList(testsonginfo);
-	addAnnounce(testlost);
-	addAnnounce(testnotice, true);*/
+	$('#playdate')[0].valueAsDate = new Date();
 });
