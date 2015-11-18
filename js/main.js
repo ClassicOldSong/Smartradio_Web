@@ -27,17 +27,17 @@ $(function() {
 	});
 
 	$('#pickbtn').click(function() {
-		$('#modulepick').css('margin-top', $('body').scrollTop()+'px');
+		$('#modulepick').css('margin-top', $(window).scrollTop()+'px');
 		$('.pick').fadeIn();
 		menu.fadeOut();
 	});
 	$('#findbtn').click(function() {
-		$('#modulelost').css('margin-top', $('body').scrollTop()+'px');
+		$('#modulelost').css('margin-top', $(window).scrollTop()+'px');
 		$('.lost').fadeIn();
 		menu.fadeOut();
 	});
 	$('#songsearch').click(function() {
-		$('#modulesearch').css('margin-top', $('body').scrollTop()+50+'px');
+		$('#modulesearch').css('margin-top', $(window).scrollTop()+50+'px');
 		$('.song').fadeIn();
 		menu.fadeOut();
 	});
