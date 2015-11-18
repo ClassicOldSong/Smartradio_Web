@@ -10,7 +10,7 @@ h2, h3, h4, h5, h6, pre, code, p {
 }
 h1 {font-size: 26px;}
 h2 {font-size: 22px;}
-p {font-size: 16px;margin: 0;}
+p {font-size: 16px;margin: 0;word-wrap: break-word;}
 small {font-size: 11px;}
 
 a,a:link {
@@ -181,6 +181,7 @@ li a {
 	margin: 0 auto;
 	color: #fff;
 	line-height: 53px;
+	overflow: hidden;
 }
 
 .module {
@@ -228,7 +229,7 @@ li a {
 .module-r {
 	float: right;
 	width: calc(100% - 184px);
-	padding-bottom: 40px;
+	margin-bottom: 53px;
 }
 .module-content p {
 	line-height: 22px;
@@ -519,6 +520,7 @@ button.kc_fab_main_btn{
 	}
 	.module-r {
 		width: 100%;
+		margin-bottom: 100px;
 	}
 	.module-mfb {
 	}
