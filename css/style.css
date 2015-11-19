@@ -257,11 +257,11 @@ li a {
 	box-shadow: 0 0.2em 0.4em -0.15em rgba(0, 0, 0, 0.22);
 	-webkit-box-shadow: 0 0.1em 0.4em -0.15em rgba(0, 0, 0, 0.75);
 	-webkit-transition: -webkit-transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-			transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 .levitate:hover {
 	-webkit-transform: translateY(-0.175em);
-			transform: translateY(-0.175em);
+	transform: translateY(-0.175em);
 	box-shadow: 0 0.275em 0.4875em -0.11em rgba(0, 0, 0, 0.4);
 }
 
@@ -271,6 +271,12 @@ li a {
 	border-top: solid 1px #eee;
 	bottom: 4px;
 	color: #000;
+	background-color: #FFF;
+	-webkit-transition: opacity 500ms;
+	transition: opacity 500ms;
+}
+.x:active {
+	opacity: 0.2;
 }
 .title-page {
 	float: left;
@@ -284,10 +290,6 @@ li a {
 	right: 0;
 	top: 0;
 	margin: 6px 0px 10px;
-	transition: opacity 500ms;
-}
-.button-r:hover {
-	opacity: 0.4;
 }
 
 input,button,select,textarea{outline:none}
