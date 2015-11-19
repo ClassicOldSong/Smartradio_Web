@@ -256,7 +256,7 @@ $(function() {
 	}
 
 	function getMessageList() {
-		$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
+		$.get('/api/command/message.php', function(res) {
 			$('#logo_').text(res.projectname);
 			document.title = res.projectname + ' - Smuradio';
 			announce.empty();
