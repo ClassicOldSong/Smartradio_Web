@@ -13,6 +13,7 @@ $(function() {
 	var searchoffset = 0;
 	var inputTitle = '';
 	var selectedSong = {};
+	var serverAddr = '';
 
 	showcode.click(function() {
 		panel.toggleClass('viewCode');
@@ -27,17 +28,21 @@ $(function() {
 	});
 
 	$('#pickbtn').click(function() {
-		$('#modulepick').css('margin-top', $(window).scrollTop()+'px');
+		$('#modulepick').css('margin-top', $(window).scrollTop() + 'px');
 		$('.pick').fadeIn();
 		menu.fadeOut();
 	});
 	$('#findbtn').click(function() {
-		$('#modulelost').css('margin-top', $(window).scrollTop()+'px');
+		$('#modulelost').css('margin-top', $(window).scrollTop() + 'px');
 		$('.lost').fadeIn();
 		menu.fadeOut();
 	});
 	$('#songsearch').click(function() {
-		$('#modulesearch').css('margin-top', $(window).scrollTop()+50+'px');
+		if ($(window).width() <= 1024 && $(window).scrollTop() <= 200) {
+			$('#modulesearch').css('margin-top', $(window).scrollTop() + 100 + 'px');
+		} else {
+			$('#modulesearch').css('margin-top', $(window).scrollTop() + 50 + 'px');
+		}
 		$('.song').fadeIn();
 		menu.fadeOut();
 	});
@@ -54,7 +59,9 @@ $(function() {
 	});
 
 	$('.toastwrap').click(function() {
-		$('.toastwrap').animate({bottom: "-"+$('.toastwrap').height()+"px"}, 200);
+		$('.toastwrap').animate({
+			bottom: "-" + $('.toastwrap').height() + "px"
+		}, 200);
 		menu.css('bottom', 0);
 	});
 
@@ -131,7 +138,9 @@ $(function() {
 	function setToast(data) {
 		$('.toast').text(data);
 		$('.toastwrap').css('bottom', '-' + $('.toastwrap').height() + 'px');
-		$('.toastwrap').animate({bottom: 0}, 200);
+		$('.toastwrap').animate({
+			bottom: 0
+		}, 200);
 		menu.css('bottom', $('.toastwrap').height() + 'px');
 	}
 
@@ -252,9 +261,7 @@ $(function() {
 	}
 
 	function getMessageList() {
-		$.get('http://121.41.115.101:88/api/command/message.php', function(res) {
-			$('#logo_').text(res.projectname);
-			document.title = res.projectname + ' - Smuradio';
+		$.get(serverAddr + '/api/command/message.php', function(res) {
 			announce.empty();
 			if (res.notice != "") {
 				addAnnounce(res.notice, true);
@@ -270,7 +277,7 @@ $(function() {
 	}
 
 	function getSongList() {
-		$.get('http://121.41.115.101:88/api/command/index.php', function(res) {
+		$.get(serverAddr + '/api/command/index.php', function(res) {
 			mainpage.empty();
 			for (i in res) {
 				addSongList(res[i]);
@@ -278,8 +285,13 @@ $(function() {
 		}, 'json');
 	}
 
-	getMessageList();
-	getSongList();
+	$.get('config.json', function(res) {
+		serverAddr = res.serverAddr;
+		$('#logo_').text(res.projectname);
+		document.title = res.projectname + ' - Smuradio';
+		getMessageList();
+		getSongList();
+	}, 'json');
 
 	$('#playdate')[0].valueAsDate = new Date();
 });
