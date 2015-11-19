@@ -82,7 +82,7 @@ $(function() {
 				message: sendmessage,
 				time: playdate.replace(/\-/g, '\/')
 			}
-			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+			$.post(serverAddr + '/api/command/update.php', postinfo, function(res) {
 				getSongList();
 				setToast(res.message);
 			}, 'json');
