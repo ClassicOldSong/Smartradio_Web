@@ -211,7 +211,7 @@ li a {
 }
 .module-action p {
 	display: inline-block;
-	margin-right: 8px;
+	margin-right: 70px;
 	padding: 12px 0;
 }
 .module-action-r {
@@ -280,8 +280,14 @@ li a {
 	top: -12px;
 }
 .button-r {
-	float: right;
+	position: absolute;
+	right: 0;
+	top: 0;
 	margin: 6px 0px 10px;
+	transition: opacity 500ms;
+}
+.button-r:hover {
+	opacity: 0.4;
 }
 
 input,button,select,textarea{outline:none}
@@ -522,7 +528,7 @@ button.kc_fab_main_btn{
 	}
 	.module-r {
 		width: 100%;
-		margin-bottom: 100px;
+		margin-bottom: 80px;
 	}
 	.module-mfb {
 	}

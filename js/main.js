@@ -103,7 +103,7 @@ $(function() {
 				message: iteminfo,
 				tel: contactinfo
 			}
-			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+			$.post(serverAddr + '/api/command/update.php', postinfo, function(res) {
 				getMessageList();
 				setToast(res.message);
 			}, 'json');
@@ -206,9 +206,7 @@ $(function() {
 		var $headmsg = $('<div class="song-title"/>')
 			.append($title, $message);
 		var $user = $('<p/>')
-			.text('点歌人：' + data.user);
-		var $to = $('<p/>')
-			.text('送给：' + data.to);
+			.text('点歌人：' + data.user + '，送给：' + data.to);
 		var $isplayedbtn = $('<button type="button">');
 		switch (data.info) {
 			case "0":
@@ -229,7 +227,7 @@ $(function() {
 		var $isplayed = $('<div class="button-r"/>')
 			.append($isplayedbtn);
 		var $info = $('<div class="module-action x">')
-			.append($user, $to, $isplayed);
+			.append($user, $isplayed);
 		var $mainBody = $('<div class="module-r"/>')
 			.append($headmsg, $info);
 		var $listDiv = $('<div class="module levitate row"/>')
