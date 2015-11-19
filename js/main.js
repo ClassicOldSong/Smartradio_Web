@@ -37,7 +37,11 @@ $(function() {
 		menu.fadeOut();
 	});
 	$('#songsearch').click(function() {
-		$('#modulesearch').css('margin-top', $(window).scrollTop()+50+'px');
+		if ($(window).width() <= 1024 && $(window).scrollTop() <= 200) {
+			$('#modulesearch').css('margin-top', $(window).scrollTop() + 100 + 'px');
+		} else {
+			$('#modulesearch').css('margin-top', $(window).scrollTop() + 50 + 'px');
+		}
 		$('.song').fadeIn();
 		menu.fadeOut();
 	});
