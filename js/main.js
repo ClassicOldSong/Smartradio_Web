@@ -79,7 +79,7 @@ $(function() {
 				message: sendmessage,
 				time: playdate.replace(/\-/g, '\/')
 			}
-			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+			$.post('/api/command/update.php', postinfo, function(res) {
 				getSongList();
 				setToast(res.message);
 			}, 'json');
@@ -100,7 +100,7 @@ $(function() {
 				message: iteminfo,
 				tel: contactinfo
 			}
-			$.post('http://121.41.115.101:88/api/command/update.php', postinfo, function(res) {
+			$.post('/api/command/update.php', postinfo, function(res) {
 				getMessageList();
 				setToast(res.message);
 			}, 'json');
@@ -274,7 +274,7 @@ $(function() {
 	}
 
 	function getSongList() {
-		$.get('http://121.41.115.101:88/api/command/index.php', function(res) {
+		$.get('/api/command/index.php', function(res) {
 			mainpage.empty();
 			for (i in res) {
 				addSongList(res[i]);
