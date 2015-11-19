@@ -1,5 +1,6 @@
 # Smuradio-Web
  本项目为Smuradio点歌台系统的前端部分
+
  Smuradio项目地址：https://github.com/qwe7002/smuradio
 
 ## config.json
@@ -12,5 +13,7 @@
 
 ## 致谢
 基础样式：AddamsChen
+
 样式修正&前端脚本：ClassicOldSong
+
 后端设计：qwe7002
