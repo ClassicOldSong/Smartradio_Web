@@ -1,14 +1,14 @@
-# Smuradio-Web
- 本项目为Smuradio点歌台系统的前端部分
+# Smartradio-Web
+ 本项目为Smartradio点歌台系统的前端部分
 
- Smuradio项目地址：https://github.com/qwe7002/smuradio
+ Smartradio项目地址：https://github.com/qwe7002/smuradio
 
 ## config.json
 前端部分的配置文件说明
 
 	 {
 		"serverAddr": "http://121.41.115.101:88", /*后端服务器地址，留空则默认前后端一体*/
-		"projectname":  "Smuradio测试页面" /*站点标题*/
+		"projectname":  "Smartradio测试页面" /*站点标题*/
 	}
 
 ## 致谢
