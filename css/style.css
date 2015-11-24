@@ -165,6 +165,7 @@ nav,.default-nav {
 	width: 100%;
 	height: 56px;
 	color: #fafafa;
+	overflow: hidden;
 }
 .default-nav {
 }
@@ -229,7 +230,6 @@ li a {
 .module-r {
 	float: right;
 	width: calc(100% - 184px);
-	margin-bottom: 53px;
 }
 .module-content p {
 	line-height: 22px;
@@ -266,17 +266,14 @@ li a {
 }
 
 .x {
-	position: absolute;
-	width: calc(100% - 228px);
+	position: relative;
+	width: 100%;
 	border-top: solid 1px #eee;
-	bottom: 4px;
 	color: #000;
 	background-color: #FFF;
-	-webkit-transition: opacity 500ms;
-	transition: opacity 500ms;
+	margin-top: 14px;
 }
 .x:active {
-	opacity: 0.2;
 }
 .title-page {
 	float: left;
@@ -284,6 +281,7 @@ li a {
 .song-title {
 	position: relative;
 	top: -12px;
+	min-height: 86px;
 }
 .button-r {
 	position: absolute;
@@ -530,12 +528,11 @@ button.kc_fab_main_btn{
 	}
 	.module-r {
 		width: 100%;
-		margin-bottom: 80px;
 	}
 	.module-mfb {
 	}
 	.x {
-		width: calc(100% - 44px);
+		width: 100%;
 	}
 }
 
@@ -563,7 +560,6 @@ button.kc_fab_main_btn{
 	.module {
 	font-size: 0.8em;
 	margin: 0 0 1em;
-	padding: 14px 22px 48px;
 	}
 	.module-mfb {
 		width: 100%;
