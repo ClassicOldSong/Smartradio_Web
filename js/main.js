@@ -65,6 +65,13 @@ $(function() {
 		menu.css('bottom', 0);
 	});
 
+	menu.mouseenter(function() {
+		menu.attr('data-mfb-state', 'open');
+	});
+	menu.mouseleave(function() {
+		menu.attr('data-mfb-state', 'closed');
+	});
+
 	$('#submitSong').click(function() {
 		var sendername = $('#sendername').val().trim();
 		var playdate = $('#playdate').val();
