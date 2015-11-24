@@ -217,6 +217,11 @@ li a {
 }
 .module-action-r {
 	float: right;
+}
+.module-action-l {
+	float: left;
+}
+.module-action-l.btn, .module-action-r.btn{
 	margin-top: 28px;
 	border: 0px;
 	border-radius: 2px;
