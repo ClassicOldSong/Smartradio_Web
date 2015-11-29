@@ -293,7 +293,7 @@ $(function() {
 	$.get('config.json', function(res) {
 		serverAddr = res.serverAddr;
 		$('#logo_').text(res.projectname);
-		document.title = res.projectname + ' - Smuradio';
+		document.title = res.projectname + ' - Smartradio';
 		getMessageList();
 		getSongList();
 	}, 'json');
