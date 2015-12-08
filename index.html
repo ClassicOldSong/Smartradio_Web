@@ -12,7 +12,15 @@
 	<link href="css/mfb.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mfb.js"></script>
+	<script src="js/jquery.ua.min.js"></script>
 	<script src="js/main.js"></script>
+	<<script>
+		function onlyNum() {
+			if(!(event.keyCode==46)&&!(event.keyCode==8)&&!(event.keyCode==37)&&!(event.keyCode==39))
+			if(!((event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=96&&event.keyCode<=105)))
+			event.returnValue=false;
+		}
+	</script>
 </head>
 <body>
 	<div class='bodywrap'>
@@ -90,7 +98,7 @@
 				<label for="getname">姓名:</label>
 				<input type="text" id="getname" name="getname" class="song" placeholder="丢失者姓名">
 				<label for="contactinfo">联系方式:</label>
-				<input type="number" id="contactinfo" name="contactinfo" class="name" placeholder="电话号码">
+				<input type="number" id="contactinfo" name="contactinfo" class="name" placeholder="电话号码(仅数字)" onkeydown="onlyNum();">
 				<label for="iteminfo">详细信息:</label>
 				<input type="text" id="iteminfo" name="iteminfo" class="textarea" placeholder="物品详细描述">
 				<input type="button" value="取消" class="cancelbtn box module-action-r btn">
@@ -107,7 +115,6 @@
 				<ul class='resultlist'></ul>
 				<input type="button" id="searchsong" value="搜索" class="module-action-l submitbtn btn">
 				<input type="button" value="取消" id="cancelbtn-search" class="cancelbtn module-action-r btn">
-				
 			</div>
 		</div>
 	</div>

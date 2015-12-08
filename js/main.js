@@ -28,20 +28,28 @@ $(function() {
 	});
 
 	$('#pickbtn').click(function() {
-		$('#modulepick').css('margin-top', $(window).scrollTop() + 'px');
+		if ($.ua.browser.name == "firefox") {
+			$('#modulepick').css('margin-top', $(window).scrollTop() + 'px');
+		} else {
+			$('#modulepick').css('margin-top', $('body').scrollTop() + 'px');
+		}
 		$('.pick').fadeIn();
 		menu.fadeOut();
 	});
 	$('#findbtn').click(function() {
-		$('#modulelost').css('margin-top', $(window).scrollTop() + 'px');
+		if ($.ua.browser.name == "firefox") {
+			$('#modulelost').css('margin-top', $(window).scrollTop() + 'px');
+		} else {
+			$('#modulelost').css('margin-top', $('body').scrollTop() + 'px');
+		}
 		$('.lost').fadeIn();
 		menu.fadeOut();
 	});
 	$('#songsearch').click(function() {
-		if ($(window).width() <= 1024 && $(window).scrollTop() <= 200) {
+		if ($(window).width() <= 1024 && $.ua.browser.name == "firefox") {
 			$('#modulesearch').css('margin-top', $(window).scrollTop() + 100 + 'px');
 		} else {
-			$('#modulesearch').css('margin-top', $(window).scrollTop() + 50 + 'px');
+			$('#modulesearch').css('margin-top', $('body').scrollTop() + 100 + 'px');
 		}
 		$('.song').fadeIn();
 		menu.fadeOut();
@@ -74,12 +82,39 @@ $(function() {
 
 	$('#submitSong').click(function() {
 		var sendername = $('#sendername').val().trim();
-		var playdate = $('#playdate').val();
 		var playtime = $('#playtime').val();
+		var playdate = $('#playdate').val();
 		var toname = $('#toname').val().trim();
 		var sendmessage = $('#sendmessage').val().trim();
-		var ifsubmit = typeof selectedSong.name == 'undefined' ? false : sendername == '' ? false : playtime == '' ? false : playdate == '' ? false : toname == '' ? false : sendmessage == '' ? false : true;
-		if (ifsubmit) {
+		var ifsubmit = function() {
+			if (typeof selectedSong.name == 'undefined') {
+				$('#songsearch').css('background-color', '#FF0000');
+				return false;
+			} else if (sendername == '') {
+				$('#sendername').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (playdate == '') {
+				$('#sendername').css('border-bottom', 'solid 1px #3B58B4');
+				$('#playdate').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (playtime == '') {
+				$('#sendername, #playdate').css('border-bottom', 'solid 1px #3B58B4');
+				$('#playtime').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (toname == '') {
+				$('#sendername, #playdate, #playtime').css('border-bottom', 'solid 1px #3B58B4');
+				$('#toname').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (sendmessage == '') {
+				$('#sendername, #playdate, #playtime, #toname').css('border-bottom', 'solid 1px #3B58B4');
+				$('#sendmessage').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else {
+				$('#sendername, #playdate, #playtime, #toname, #sendmessage').css('border-bottom', 'solid 1px #3B58B4');
+				return true;
+			}
+		}
+		if (ifsubmit()) {
 			var postinfo = {
 				mod: "requestmusicpost",
 				user: sendername,
@@ -100,15 +135,35 @@ $(function() {
 
 	$('#submitLost').click(function() {
 		var getname = $('#getname').val().trim();
-		var contactinfo = $('#contactinfo').val().trim();
+		var contactinfo = $('#contactinfo')[0].valueAsNumber;
 		var iteminfo = $('#iteminfo').val().trim();
-		var ifsubmit = getname == '' ? false : contactinfo == '' ? false : iteminfo == '' ? false : true;
-		if (ifsubmit) {
+		var ifsubmit = function() {
+			if (getname == '') {
+				$('#getname').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (isNaN(contactinfo)) {
+				$('#getname').css('border-bottom', 'solid 1px #3B58B4');
+				$('#contactinfo').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else if (iteminfo == '') {
+				$('#getname, #contactinfo').css('border-bottom', 'solid 1px #3B58B4');
+				$('#iteminfo').css('border-bottom', 'solid 1px #FF0000');
+				return false;
+			} else {
+				$('#getname, #contactinfo, #iteminfo').css('border-bottom', 'solid 1px #3B58B4');
+				var telReg = !!$('#contactinfo').val().match(/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/);
+				if (!telReg) {
+					$('#contactinfo').css('border-bottom', 'solid 1px #FF0000');
+				}
+				return telReg;
+			}
+		}
+		if (ifsubmit()) {
 			var postinfo = {
 				mod: "LostandfoundPost",
 				user: getname,
 				message: iteminfo,
-				tel: contactinfo
+				tel: $('#contactinfo').val()
 			}
 			$.post(serverAddr + '/api/command/update.php', postinfo, function(res) {
 				getMessageList();
@@ -120,7 +175,6 @@ $(function() {
 	});
 
 	$("#titleinput").keydown(function(event) {
-		console.log(event);
 		if (event.which === 13) {
 			startSearch();
 		}
@@ -180,7 +234,8 @@ $(function() {
 								'picUrl': data.result.songs[listid].album.picUrl,
 								'musicid': data.result.songs[listid].id
 							}
-							$('#songsearch').text(songinfo);
+							$('#songsearch').text(songinfo)
+								.css('background-color', '#888');
 							$('.overlay.song').fadeOut();
 						})
 					);
