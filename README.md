@@ -6,7 +6,7 @@
 ## config.json
 前端部分的配置文件说明
 
-	 {
+	{
 		"serverAddr": "http://121.41.115.101:88", /*后端服务器地址，留空则默认前后端一体*/
 		"projectname":  "Smartradio测试页面" /*站点标题*/
 	}
